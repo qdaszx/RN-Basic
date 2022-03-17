@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import PalettePreview from '../components/PalettePreview';
 
 const Home = ({ navigation }) => {
   const [colorPalette, setColorPalette] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleColorPalette = useCallback(async () => {
     const result = await fetch(
@@ -14,6 +15,14 @@ const Home = ({ navigation }) => {
     if (result.ok) {
       setColorPalette(palette);
     }
+  }, []);
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await handleColorPalette();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -32,6 +41,9 @@ const Home = ({ navigation }) => {
           palette={item}
         />
       )}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+      }
     />
   );
 };
