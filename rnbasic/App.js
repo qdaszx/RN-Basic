@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './screens/Home';
