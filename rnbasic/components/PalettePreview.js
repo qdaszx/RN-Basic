@@ -16,12 +16,7 @@ const PalettePreview = ({ handlePress, palette }) => {
         data={palette.colors.slice(0, 5)}
         keyExtractor={(item) => item.colorName}
         renderItem={({ item }) => (
-          <View
-            style={[
-              styles.box,
-              { backgroundColor: item.hexCode, flexDirection: 'row' },
-            ]}
-          />
+          <View style={[styles.box, { backgroundColor: item.hexCode }]} />
         )}
       />
     </TouchableOpacity>
